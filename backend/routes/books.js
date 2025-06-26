@@ -1,9 +1,10 @@
 const express = require('express');
 const Book = require('../models/Book');
+const { authenticateToken, isAdmin } = require('../middleware/auth');
 const router = express.Router();
 
-// Create a new book
-router.post('/', async (req, res) => {
+// Create a new book (admin only)
+router.post('/', authenticateToken, isAdmin, async (req, res) => {
   try {
     const book = new Book(req.body);
     await book.save();
@@ -34,8 +35,8 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// Update a book by ID
-router.put('/:id', async (req, res) => {
+// Update a book by ID (admin only)
+router.put('/:id', authenticateToken, isAdmin, async (req, res) => {
   try {
     const book = await Book.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!book) return res.status(404).json({ error: 'Book not found' });
@@ -45,8 +46,8 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// Delete a book by ID
-router.delete('/:id', async (req, res) => {
+// Delete a book by ID (admin only)
+router.delete('/:id', authenticateToken, isAdmin, async (req, res) => {
   try {
     const book = await Book.findByIdAndDelete(req.params.id);
     if (!book) return res.status(404).json({ error: 'Book not found' });

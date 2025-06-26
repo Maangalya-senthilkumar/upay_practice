@@ -21,6 +21,9 @@ app.get('/', (req, res) => {
 const booksRouter = require('./routes/books');
 app.use('/api/books', booksRouter);
 
+const authRouter = require('./routes/auth');
+app.use('/api/auth', authRouter);
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
