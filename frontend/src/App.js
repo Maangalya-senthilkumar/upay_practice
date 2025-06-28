@@ -60,7 +60,7 @@ function App() {
 
   return (
     <div className="App">
-      <h2>Welcome to the Library App!</h2>
+      <h2>Welcome to the Library App1!</h2>
       <h1>Library Management System</h1>
       <p>Welcome, {user.name} ({user.role}) <button onClick={handleLogout}>Logout</button></p>
       {/* Admin-only actions */}
