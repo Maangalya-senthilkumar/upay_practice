@@ -24,6 +24,9 @@ app.use('/api/books', booksRouter);
 const authRouter = require('./routes/auth');
 app.use('/api/auth', authRouter);
 
+const chatbotRouter = require('./routes/chatbot');
+app.use('/api/chatbot', chatbotRouter);
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

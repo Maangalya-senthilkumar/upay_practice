@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const LoginLog = require('../models/LoginLog');
 const router = express.Router();
 
 // Register (students/teachers only)
@@ -23,10 +24,23 @@ router.post('/register', async (req, res) => {
 // Login (all roles)
 router.post('/login', async (req, res) => {
   try {
-    const { userId, password } = req.body;
+    const { userId, password, faceImage, latitude, longitude } = req.body;
+    console.log('Face image received:', !!faceImage);
+    console.log('Location:', latitude, longitude);
     const user = await User.findOne({ userId });
+    let isMatch = false;
+    if (user) {
+      isMatch = await bcrypt.compare(password, user.password);
+    }
+    // Log the login attempt
+    await LoginLog.create({
+      userId,
+      faceImage,
+      latitude,
+      longitude,
+      success: !!user && isMatch
+    });
     if (!user) return res.status(400).json({ error: 'Invalid credentials' });
-    const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ error: 'Invalid credentials' });
     const token = jwt.sign({ userId: user.userId, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
     res.json({ token, role: user.role, name: user.name });
