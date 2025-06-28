@@ -96,6 +96,7 @@ function App() {
           </li>
         ))}
       </ul>
+      <footer>Contact us at library@example.com</footer>
     </div>
   );
 }
