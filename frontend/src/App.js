@@ -4,6 +4,7 @@ import './App.css';
 import Login from './Login';
 import AddBookForm from './AddBookForm';
 import UpdateBookForm from './UpdateBookForm';
+import Chatbot from './chatbot';
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -99,6 +100,7 @@ function App() {
         ))}
       </ul>
       <footer>Contact us at library@example.com</footer>
+      <Chatbot />
     </div>
   );
 }
