@@ -48,29 +48,27 @@ function Login({ onLogin }) {
   }
 
   return (
-    <div style={{ maxWidth: 400, margin: '2rem auto', padding: 20, border: '1px solid #ccc', borderRadius: 8 }}>
+    <div style={{ maxWidth: 400, margin: '2rem auto', padding: 20, border: '1px solid #ccc', borderRadius: 8, boxSizing: 'border-box', width: '100%' }}>
       <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
           <label>User ID:</label>
-          <input value={userId} onChange={e => setUserId(e.target.value)} required />
+          <input value={userId} onChange={e => setUserId(e.target.value)} required style={{ width: '100%' }} />
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+          <label>Password:</label>
+          <input type="password" value={password} onChange={e => setPassword(e.target.value)} required style={{ width: '100%' }} />
         </div>
         <div>
-          <label>Password:</label>
-          <input type="password" value={password} onChange={e => setPassword(e.target.value)} required />
-        </div>
-        <div style={{ margin: '1em 0' }}>
           <FaceCapture onCapture={setFaceImage} />
         </div>
-        <button type="submit">Login</button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {error && <div style={{ color: 'red', marginBottom: 8 }}>{error}</div>}
+        <button type="submit" style={{ width: '100%' }}>Login</button>
       </form>
-      {location.latitude && location.longitude && (
-        <p style={{ fontSize: '0.8em', color: '#555' }}>
-          Location: {location.latitude.toFixed(4)}, {location.longitude.toFixed(4)}
-        </p>
-      )}
-      <button onClick={() => setShowRegister(true)} style={{ marginTop: 10 }}>New user? Register</button>
+      <div style={{ marginTop: 10 }}>
+        <span>Don't have an account? </span>
+        <button style={{ width: '100%' }} onClick={() => setShowRegister(true)}>Register</button>
+      </div>
     </div>
   );
 }

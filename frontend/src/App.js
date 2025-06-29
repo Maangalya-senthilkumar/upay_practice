@@ -61,9 +61,7 @@ function App() {
 
   return (
     <div className="App">
-
       <h2>Welcome to the Library App1!</h2>
-
       <h1>Library Management System</h1>
       <p>Welcome, {user.name} ({user.role}) <button onClick={handleLogout}>Logout</button></p>
       {/* Admin-only actions */}
@@ -75,9 +73,9 @@ function App() {
       )}
       {loading && <p>Loading books...</p>}
       {error && <p style={{color: 'red'}}>{error}</p>}
-      <ul>
+      <ul style={{listStyle: 'none', padding: 0}}>
         {books.map(book => (
-          <li key={book._id}>
+          <li key={book._id} style={{marginBottom: '1rem', borderBottom: '1px solid #eee', paddingBottom: '0.5rem'}}>
             {editingBookId === book._id ? (
               <UpdateBookForm
                 book={book}
@@ -89,8 +87,8 @@ function App() {
               <>
                 <strong>{book.title}</strong> by {book.author} ({book.publishedYear})
                 {user.role === 'admin' && (
-                  <span>
-                    <button onClick={() => handleStartEdit(book._id)}>Update</button>
+                  <span style={{display: 'inline-block', marginLeft: 8}}>
+                    <button style={{marginRight: 4}} onClick={() => handleStartEdit(book._id)}>Update</button>
                     <button onClick={() => handleDelete(book._id)}>Delete</button>
                   </span>
                 )}
@@ -99,8 +97,8 @@ function App() {
           </li>
         ))}
       </ul>
-      <footer>Contact us at library@example.com</footer>
-      <Chatbot />
+      <footer style={{marginTop: 30}}>Contact us at library@example.com</footer>
+      <Chatbot className="chatbot" />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function Chatbot() {
+function Chatbot({ className = '' }) {
   const [messages, setMessages] = useState([
     { from: 'bot', text: 'Hi! Ask me about books, admin actions, or login.' }
   ]);
@@ -20,7 +20,7 @@ function Chatbot() {
   };
 
   return (
-    <div style={{border: '1px solid #ccc', padding: 10, width: 300, position: 'fixed', bottom: 20, right: 20, background: '#fff'}}>
+    <div className={className + ' chatbot'} style={{border: '1px solid #ccc', padding: 10, width: 300, position: 'fixed', bottom: 20, right: 20, background: '#fff', zIndex: 1000, borderRadius: 8, boxShadow: '0 2px 8px rgba(0,0,0,0.08)'}}>
       <div style={{height: 150, overflowY: 'auto', marginBottom: 10}}>
         {messages.map((m, i) => (
           <div key={i} style={{textAlign: m.from === 'bot' ? 'left' : 'right'}}>

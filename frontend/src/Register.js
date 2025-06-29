@@ -36,36 +36,38 @@ function Register({ onRegister, onSwitchToLogin }) {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: '2rem auto', padding: 20, border: '1px solid #ccc', borderRadius: 8 }}>
+    <div style={{ maxWidth: 400, margin: '2rem auto', padding: 20, border: '1px solid #ccc', borderRadius: 8, boxSizing: 'border-box', width: '100%' }}>
       <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
           <label>User ID:</label>
-          <input value={userId} onChange={e => setUserId(e.target.value)} required />
+          <input value={userId} onChange={e => setUserId(e.target.value)} required style={{ width: '100%' }} />
         </div>
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
           <label>Name:</label>
-          <input value={name} onChange={e => setName(e.target.value)} required />
+          <input value={name} onChange={e => setName(e.target.value)} required style={{ width: '100%' }} />
         </div>
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
           <label>Password:</label>
-          <input type="password" value={password} onChange={e => setPassword(e.target.value)} required />
+          <input type="password" value={password} onChange={e => setPassword(e.target.value)} required style={{ width: '100%' }} />
         </div>
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
           <label>Role:</label>
-          <select value={role} onChange={e => setRole(e.target.value)}>
+          <select value={role} onChange={e => setRole(e.target.value)} style={{ width: '100%' }}>
             <option value="student">Student</option>
             <option value="teacher">Teacher</option>
           </select>
         </div>
-        <div style={{ margin: '1em 0' }}>
+        <div>
           <FaceCapture onCapture={setFaceImage} />
         </div>
-        <button type="submit">Register</button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        {success && <p style={{ color: 'green' }}>{success}</p>}
+        {error && <div style={{ color: 'red', marginBottom: 8 }}>{error}</div>}
+        {success && <div style={{ color: 'green', marginBottom: 8 }}>{success}</div>}
+        <button type="submit" style={{ width: '100%' }}>Register</button>
       </form>
-      <button onClick={onSwitchToLogin} style={{ marginTop: 10 }}>Already have an account? Login</button>
+      <div style={{ marginTop: 10 }}>
+        <button style={{ width: '100%' }} onClick={onSwitchToLogin}>Back to Login</button>
+      </div>
     </div>
   );
 }
